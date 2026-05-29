@@ -14,8 +14,8 @@ let package = Package(
             .binaryTarget(name: "MaestroCore", path: "Frameworks/MaestroCore.xcframework.zip"),
             .binaryTarget(
                 name: "paramountKit",
-                url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.12.174/paramountKit-4.0.12.174.zip",
-                checksum: "d3f3f821f5fa7860107b6537154476691c18e15147558dde6548abafe30e59be"
+                url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.14.185/paramountKit-4.0.14.185.zip",
+                checksum: "848d0d5c85b45d272499777d03fd916bf42c02ca5f205d761584c5dfaf3121ae"
             )
         ]
 )
