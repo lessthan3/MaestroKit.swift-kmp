@@ -5,17 +5,37 @@ import PackageDescription
 
 let package = Package(
     name: "MaestroKit",
-    platforms: [.tvOS(.v18), .iOS(.v18)],
-        products: [
-            .library(name: "MaestroKitParamount", targets: ["MaestroKitParamount", "MaestroCore", "paramountKit"])
+    platforms: [
+           .iOS(.v18), .tvOS(.v18)
+       ],
+    products: [
+        // Products define the executables and libraries a package produces, making them visible to other packages.
+        .library(
+            name: "MaestroKit",
+            targets: ["MaestroKitParamount", "MaestroCore", "paramountKit"]
+        ),
+    ],
+    dependencies: [
+            // Dependencies declare other packages that this package depends on.
         ],
-        targets: [
-            .binaryTarget(name: "MaestroKitParamount", path: "Frameworks/MaestroKitParamount.xcframework.zip"),
-            .binaryTarget(name: "MaestroCore", path: "Frameworks/MaestroCore.xcframework.zip"),
-            .binaryTarget(
-                name: "paramountKit",
-                url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.15.203/paramountKit-4.0.15.203.zip",
-                checksum: "1038247bd46a6bfb403293d94381e225c981b74941b7fdff847b4c818ae152f1"
-            )
-        ]
+    targets: [
+        // Targets are the basic building blocks of a package, defining a module or a test suite.
+        // Targets can depend on other targets in this package and products from dependencies.
+        // Checksum is different every time xcodebuild command is run.
+        // Need to find a way to substitute checksum from the file generated "
+        .binaryTarget(
+            name: "MaestroKitParamount",
+            url: "https://cloudStorageService/MaestroKitParamount.xcframework.zip",
+            checksum: "eabd01a2eeede758ed785c0a98ce03d29935ce0a59603eb200e6fe9f65477b19"),
+        .binaryTarget(
+            name: "MaestroCore",
+            url: "https://cloudStorageService/MaestroCore.xcframework.zip",
+            checksum: "e4eadae8eb2f4f2477c428b49ece0d3ab47f991a266314dd53312c0cc12d00c5"),
+        .binaryTarget(
+            name: "paramountKit",
+            url: "https://github.com/lessthan3/MaestroKit.android/releases/download/4.0.1.108/paramountKit-4.0.1.108.zip",
+            checksum: "b1580724914f89b1e366134743389ac1427886b725a40610f5034b568b12aca2"
+        )
+
+    ]
 )
