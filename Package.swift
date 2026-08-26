@@ -33,8 +33,8 @@ let package = Package(
         .binaryTarget(name: "MaestroCore", path: "Frameworks/MaestroCore.xcframework.zip"),
         .binaryTarget(
             name: "paramountKit",
-            url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.29.296/paramountKit-4.0.29.296.zip",
-            checksum: "9d2c42818f518aba7f40002a47fb92404aef13ae5ff100a860a634ba189572bc"
+            url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.32.320/paramountKit-4.0.32.320.zip",
+            checksum: "2fb42bacb889d1e397b847a9cdb0b7ac4ded44daa7b2e52bade91830f31966ae"
         ),
         // Internal link shim (source target): pulls the dynamic Sentry framework
         // into the product so MaestroCore's telemetry resolves at runtime. Its
