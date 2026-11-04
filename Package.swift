@@ -1,12 +1,11 @@
 // swift-tools-version: 6.2
 // GENERATED — do not edit by hand.
 //
-// Rendered by scripts/render_package_manifest.sh from this template during a
-// tagged release build. The KMP target's url + checksum are pulled straight
-// from the client's <kit>/Package.swift — the same coordinates the framework
-// was compiled against — so the shipped manifest can never drift from the
-// binary. Bump the KMP version in one place (<kit>/Package.swift) and it flows
-// through here automatically.
+// Rendered by scripts/render_package_manifest.sh during a tagged release build
+// and committed to the public client SDK repo. Core, Kit, and KMP all ship as
+// remote binaryTargets: the url points at the matching GitHub Release asset and
+// the checksum is computed from that exact zip, so a resolved package can never
+// drift from the binary it was built against.
 
 import PackageDescription
 
@@ -17,7 +16,7 @@ let package = Package(
         // MaestroSentryLink and MaestroRiveLink are internal link shims:
         // consumers never import them, but their presence pulls the Sentry and
         // RiveRuntime dependencies into the app so the binary targets resolve.
-        .library(name: "MaestroKit", targets: ["MaestroKitParamount", "MaestroCore", "paramountKit", "MaestroSentryLink", "MaestroRiveLink"])
+        .library(name: "MaestroKit", targets: ["MaestroKit", "MaestroCore", "coreKit", "MaestroSentryLink", "MaestroRiveLink"])
     ],
     dependencies: [
         // Dynamic Sentry product so MaestroCore's `@rpath/Sentry.framework`
@@ -29,32 +28,40 @@ let package = Package(
         .package(url: "https://github.com/rive-app/rive-ios", exact: "6.21.0"),
     ],
     targets: [
-        .binaryTarget(name: "MaestroKitParamount", path: "Frameworks/MaestroKitParamount.xcframework.zip"),
-        .binaryTarget(name: "MaestroCore", path: "Frameworks/MaestroCore.xcframework.zip"),
         .binaryTarget(
-            name: "paramountKit",
-            url: "https://github.com/lessthan3/MaestroKit.android/releases/download/paramountKit-4.0.29.296/paramountKit-4.0.29.296.zip",
-            checksum: "9d2c42818f518aba7f40002a47fb92404aef13ae5ff100a860a634ba189572bc"
+            name: "MaestroKit",
+            url: "https://github.com/lessthan3/MaestroKit.swift-kmp/releases/download/0.0.0-next-preview/MaestroKit.xcframework.zip",
+            checksum: "7e5a930ca8cfe531e42f42249ca3f3f1748564f0d3d49d91703fd057164bd4cf"
+        ),
+        .binaryTarget(
+            name: "MaestroCore",
+            url: "https://github.com/lessthan3/MaestroKit.swift-kmp/releases/download/0.0.0-next-preview/MaestroCore.xcframework.zip",
+            checksum: "4e4b786ba3b7c1cfa561bc5a1267a18a0acd3f018797fea800404de970bef563"
+        ),
+        .binaryTarget(
+            name: "coreKit",
+            url: "https://github.com/lessthan3/MaestroKit.android/releases/download/coreKit-4.0.42.496/coreKit-4.0.42.496.zip",
+            checksum: "43f61fdae89e54ee9f470a111278157ce5593c7c1bccbb3c3f9d1781001b5518"
         ),
         // Internal link shim (source target): pulls the dynamic Sentry framework
         // into the product so MaestroCore's telemetry resolves at runtime. Its
-        // source ships inside the release zip at the path below.
+        // source is committed to the public repo at the path below.
         .target(
             name: "MaestroSentryLink",
             dependencies: [
                 .product(name: "Sentry-Dynamic", package: "sentry-cocoa"),
             ],
-            path: "MaestroKitParamountPackage/Sources/MaestroSentryLink"
+            path: "Sources/MaestroSentryLink"
         ),
         // Internal link shim (source target): pulls RiveRuntime into the product
         // so the kit binary's `import RiveRuntime` resolves and links. Its source
-        // ships inside the release zip at the path below.
+        // is committed to the public repo at the path below.
         .target(
             name: "MaestroRiveLink",
             dependencies: [
                 .product(name: "RiveRuntime", package: "rive-ios"),
             ],
-            path: "MaestroKitParamountPackage/Sources/MaestroRiveLink"
+            path: "Sources/MaestroRiveLink"
         )
     ]
 )
